@@ -17,6 +17,7 @@ services:
     build:
       context: ./node
       dockerfile: Dockerfile
+    entrypoint: ["sh", "-c", "npm install && dockerize -wait tcp://mysql:3306 -timeout 20s && node server.js"]
     container_name: node
     restart: always
     depends_on:
@@ -38,9 +39,6 @@ services:
       - "3306:3306"
     networks:
       - mynetwork
-#    volumes:
-#      - ./mysql/mysql_data:/var/lib/mysql
-
 networks:
   mynetwork:
     driver: bridge

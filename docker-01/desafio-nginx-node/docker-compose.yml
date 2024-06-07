@@ -2,7 +2,9 @@ version: '3'
 
 services:
   nginx:
-    image: detectiverust93/nginx:prod
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     container_name: nginx
     restart: always
     depends_on:
@@ -12,7 +14,9 @@ services:
     networks:
       - mynetwork
   node:
-    image: detectiverust93/node:prod
+    build:
+      context: ./node
+      dockerfile: Dockerfile
     container_name: node
     restart: always
     depends_on:
@@ -20,7 +24,9 @@ services:
     networks:
       - mynetwork
   mysql:
-    image: detectiverust93/mysql:prod
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     container_name: mysql
     restart: always
     environment:
@@ -30,6 +36,8 @@ services:
       - "3306:3306"
     networks:
       - mynetwork
+#    volumes:
+#      - ./mysql/mysql_data:/var/lib/mysql
 
 networks:
   mynetwork:

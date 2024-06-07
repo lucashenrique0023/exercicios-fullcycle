@@ -23,6 +23,8 @@ services:
       - mysql
     networks:
       - mynetwork
+    volumes:
+      - ./node:/usr/src/app
   mysql:
     build:
       context: ./mysql
